@@ -1,0 +1,83 @@
+import { Response } from 'express'
+import { AuthRequest } from '../middleware/auth'
+import prisma from '../utils/prisma'
+import path from 'path'
+
+export const getProfile = async (req: AuthRequest, res: Response) => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: req.user!.userId },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        avatarUrl: true,
+        createdAt: true
+      }
+    })
+
+    res.json(user)
+  } catch (error: any) {
+    console.error('Get profile error:', error)
+    res.status(500).json({ 
+      message: 'Server error', 
+      error: error.message 
+    })
+  }
+}
+
+export const updateProfile = async (req: AuthRequest, res: Response) => {
+  try {
+    const { name } = req.body
+
+    const user = await prisma.user.update({
+      where: { id: req.user!.userId },
+      data: { name },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        avatarUrl: true,
+        createdAt: true
+      }
+    })
+
+    res.json({ message: 'Profile updated successfully', user })
+  } catch (error: any) {
+    console.error('Update profile error:', error)
+    res.status(500).json({ 
+      message: 'Server error', 
+      error: error.message 
+    })
+  }
+}
+
+export const uploadAvatar = async (req: AuthRequest, res: Response) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ message: 'No file uploaded' })
+    }
+
+    const avatarUrl = `http://localhost:5000/uploads/avatars/${req.file.filename}`
+
+ const user = await prisma.user.update({
+      where: { id: req.user!.userId },
+      data: { avatarUrl },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        avatarUrl: true,
+        createdAt: true
+      }
+    })
+
+    res.json({ message: 'Avatar uploaded successfully', user })
+  } catch (error: any) {
+    console.error('Upload avatar error:', error)
+    res.status(500).json({ 
+      message: 'Server error', 
+      error: error.message 
+    })
+  }
+}

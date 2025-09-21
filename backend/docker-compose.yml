@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:15
+    container_name: kitty_postgres
+    environment:
+      POSTGRES_USER: kitty_user
+      POSTGRES_PASSWORD: kitty_password
+      POSTGRES_DB: kitty_tasks_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
