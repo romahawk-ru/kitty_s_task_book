@@ -1,2 +1,2 @@
-# a_project_for_a_cat
-A project for a cat
+# Kitty's task book!
+Kitty's task book presents...
