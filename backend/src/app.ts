@@ -8,6 +8,9 @@ import authRoutes from './routes/auth'
 import userRoutes from './routes/users'
 import taskRoutes from './routes/tasks'
 
+// const __filename = fileURLToPath(import.meta.url)
+// const __dirname = path.dirname(__filename)
+
 const app = express()
 
 // Middleware
@@ -17,10 +20,10 @@ app.use(cors({
   credentials: true
 }))
 app.use(morgan('combined'))
-app.use(express.json({ limit: '10mb' }))
-app.use(express.urlencoded({ extended: true }))
+app.use(express.json({ limit: '50mb' }))
+app.use(express.urlencoded({ extended: true, limit: '50mb' }))
 
-// Serve static files
+// Serve static files - простая настройка
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')))
 
 // Routes

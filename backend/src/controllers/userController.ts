@@ -1,7 +1,6 @@
 import { Response } from 'express'
 import { AuthRequest } from '../middleware/auth'
 import prisma from '../utils/prisma'
-import path from 'path'
 
 export const getProfile = async (req: AuthRequest, res: Response) => {
   try {
@@ -30,6 +29,9 @@ export const updateProfile = async (req: AuthRequest, res: Response) => {
   try {
     const { name } = req.body
 
+    console.log('Updating profile for user:', req.user!.userId)
+    console.log('New name:', name)
+
     const user = await prisma.user.update({
       where: { id: req.user!.userId },
       data: { name },
@@ -42,7 +44,12 @@ export const updateProfile = async (req: AuthRequest, res: Response) => {
       }
     })
 
-    res.json({ message: 'Profile updated successfully', user })
+    console.log('Updated user:', user)
+
+    res.json({ 
+      message: 'Profile updated successfully', 
+      user 
+    })
   } catch (error: any) {
     console.error('Update profile error:', error)
     res.status(500).json({ 
@@ -58,9 +65,10 @@ export const uploadAvatar = async (req: AuthRequest, res: Response) => {
       return res.status(400).json({ message: 'No file uploaded' })
     }
 
-    const avatarUrl = `http://localhost:5000/uploads/avatars/${req.file.filename}`
+    // Используем относительный путь через proxy
+    const avatarUrl = `/uploads/avatars/${req.file.filename}`
 
- const user = await prisma.user.update({
+    const user = await prisma.user.update({
       where: { id: req.user!.userId },
       data: { avatarUrl },
       select: {

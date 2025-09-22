@@ -16,6 +16,19 @@ export const useAuth = () => {
     setLoading(false)
   }, [])
 
+  // Добавим функцию для обновления данных пользователя
+  // const updateUser = (updatedUser: User) => {
+  //   setUser(updatedUser)
+  //   localStorage.setItem('user', JSON.stringify(updatedUser))
+  // }
+  // В функции updateUser добавим принудительное обновление
+  const updateUser = (updatedUser: User) => {
+    setUser(updatedUser)
+    localStorage.setItem('user', JSON.stringify(updatedUser))
+    // Принудительно вызываем обновление компонента
+    setTimeout(() => setUser({ ...updatedUser }), 100)
+  }
+
   const login = async (email: string, password: string) => {
     try {
       const response = await api.post('/auth/login', { email, password })
@@ -54,37 +67,20 @@ export const useAuth = () => {
     }
   }
 
-  // const logout = () => {
-  //   // Очищаем localStorage
-  //   localStorage.removeItem('accessToken')
-  //   localStorage.removeItem('refreshToken')
-  //   localStorage.removeItem('user')
-    
-  //   // Сбрасываем состояние
-  //   setUser(null)
-    
-  //   // Перенаправляем на страницу входа
-  //   navigate('/login')
-    
-  //   // Принудительно перезагружаем страницу для полного сброса состояния
-  //   window.location.reload()
-  // }
-
-  // Более мягкий Logout безе перезагрузки страницы
   const logout = () => {
-  localStorage.removeItem('accessToken')
-  localStorage.removeItem('refreshToken')
-  localStorage.removeItem('user')
-  // Сбрасываем состояние
-  setUser(null)
-  navigate('/login', { replace: true }) // replace: true очищает историю навигации
-}
+    localStorage.removeItem('accessToken')
+    localStorage.removeItem('refreshToken')
+    localStorage.removeItem('user')
+    setUser(null)
+    navigate('/login', { replace: true })
+  }
 
   return {
     user,
     loading,
     login,
     register,
-    logout
+    logout,
+    updateUser // Экспортируем функцию обновления
   }
 }

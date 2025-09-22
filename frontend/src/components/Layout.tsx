@@ -24,8 +24,8 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       <div className="fixed inset-y-0 left-0 w-74 bg-white shadow-lg">
         <div className="flex flex-col h-full">
           {/* Logo */}
-          <div className="flex items-center justify-center h-18 px-2 bg-primary-600">
-            <img className='w-20 h-20 object-cover' src="./logo.webp" alt="Logo"/>
+          <div className="flex items-center justify-center h-18 px-2 py-2 bg-primary-600">
+            <img className='w-20 h-20' src="/public/logo.webp" alt="Cat logo"/>
             <h1 className="text-white text-xl font-bold">Kitty's Task Book</h1>
           </div>
 
@@ -57,7 +57,11 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 <img
                   src={user?.avatarUrl || '/default-avatar.png'}
                   alt={user?.name}
-                  className="w-8 h-8 rounded-full"
+                  className="w-8 h-8 rounded-full object-cover"
+                  onError={(e) => {
+                    console.log('Failed to load avatar:', user?.avatarUrl)
+                    ;(e.target as HTMLImageElement).src = '/default-avatar.png'
+                  }}
                 />
                 <div className="ml-3">
                   <p className="text-sm font-medium text-gray-900">{user?.name}</p>
