@@ -15,9 +15,9 @@ const Dashboard: React.FC = () => {
   const [isFormOpen, setIsFormOpen] = useState(false)
 
   const statusColumns = [
-    { id: 'TODO', title: 'To Do', color: 'bg-gray-100' },
-    { id: 'IN_PROGRESS', title: 'In Progress', color: 'bg-blue-50' },
-    { id: 'DONE', title: 'Done', color: 'bg-green-50' }
+    { id: 'TODO', title: 'Сделать', color: 'bg-gray-100' },
+    { id: 'IN_PROGRESS', title: 'В работе', color: 'bg-blue-50' },
+    { id: 'DONE', title: 'Готово', color: 'bg-green-50' }
   ]
 
   const handleDrop = (taskId: string, newStatus: string) => {
@@ -29,20 +29,20 @@ const Dashboard: React.FC = () => {
   }
 
   if (isLoading) {
-    return <div>Loading...</div>
+    return <div>Загрузка...</div>
   }
 
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="space-y-6">
         <div className="flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Дашборд</h1>
           <button
             onClick={() => setIsFormOpen(true)}
             className="btn-primary flex items-center"
           >
             <PlusIcon className="w-5 h-5 mr-2" />
-            New Task
+            Новая задача
           </button>
         </div>
 
@@ -108,7 +108,7 @@ const StatusColumn: React.FC<StatusColumnProps> = ({
         
         {tasks.length === 0 && (
           <div className="text-center text-gray-500 py-8">
-            No tasks in this column
+            Нет задач в этой колонке
           </div>
         )}
       </div>

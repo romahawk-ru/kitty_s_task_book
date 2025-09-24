@@ -43,7 +43,7 @@ export const useAuth = () => {
     } catch (error: any) {
       return { 
         success: false, 
-        error: error.response?.data?.message || 'Login failed' 
+        error: error.response?.data?.message || 'Ошибка входа' 
       }
     }
   }
@@ -62,7 +62,7 @@ export const useAuth = () => {
     } catch (error: any) {
       return { 
         success: false, 
-        error: error.response?.data?.message || 'Registration failed' 
+        error: error.response?.data?.message || 'Не удалось выполнить регистрацию' 
       }
     }
   }

@@ -11,61 +11,7 @@ const Profile: React.FC = () => {
   const [loading, setLoading] = useState(false)
   const [avatarLoading, setAvatarLoading] = useState(false)
 
-  // const handleNameUpdate = async (e: React.FormEvent) => {
-  //   e.preventDefault()
-  //   if (name === user?.name) return
-
-  //   setLoading(true)
-  //   setError('')
-  //   setMessage('')
-
-  //   try {
-  //     const response = await api.put('/users/me', { name })
-  //     if (response.data.user) {
-  //       updateUser(response.data.user)
-  //       setMessage('Name updated successfully')
-  //     }
-  //   } catch (error: any) {
-  //     setError(error.response?.data?.message || 'Failed to update name')
-  //   } finally {
-  //     setLoading(false)
-  //   }
-  // }
-
-  // const handleAvatarUpload = async (e: React.FormEvent) => {
-  //   e.preventDefault()
-  //   if (!avatar) return
-
-  //   setAvatarLoading(true)
-  //   setError('')
-  //   setMessage('')
-
-  //   try {
-  //     const formData = new FormData()
-  //     formData.append('avatar', avatar)
-
-  //     const response = await api.post('/users/avatar', formData, {
-  //       headers: {
-  //         'Content-Type': 'multipart/form-data',
-  //       },
-  //       timeout: 30000, // 30 секунд таймаут
-  //     })
-
-  //     if (response.data.user) {
-  //       updateUser(response.data.user)
-  //       setMessage('Avatar uploaded successfully')
-  //       setAvatar(null)
-  //     }
-  //   } catch (error: any) {
-  //     console.error('Avatar upload error:', error)
-  //     setError(error.response?.data?.message || 'Failed to upload avatar. File may be too large.')
-  //   } finally {
-  //     setAvatarLoading(false)
-  //   }
-  // }
-
   /////
-
   const handleNameUpdate = async (e: React.FormEvent) => {
   e.preventDefault()
   if (name === user?.name) return
@@ -78,7 +24,7 @@ const Profile: React.FC = () => {
     const response = await api.put('/users/me', { name })
     if (response.data.user) {
       updateUser(response.data.user)
-      setMessage('Name updated successfully')
+      setMessage('Имя успешно обновлено')
       
       // Принудительное обновление через секунду
       setTimeout(() => {
@@ -86,7 +32,7 @@ const Profile: React.FC = () => {
       }, 1000)
     }
   } catch (error: any) {
-    setError(error.response?.data?.message || 'Failed to update name')
+    setError(error.response?.data?.message || 'Не удалось обновить имя')
   } finally {
     setLoading(false)
   }
@@ -113,7 +59,7 @@ const handleAvatarUpload = async (e: React.FormEvent) => {
 
     if (response.data.user) {
       updateUser(response.data.user)
-      setMessage('Avatar uploaded successfully')
+      setMessage('Аватар загружен успешно')
       setAvatar(null)
       
       // Принудительное обновление для применения изменений
@@ -122,8 +68,8 @@ const handleAvatarUpload = async (e: React.FormEvent) => {
       }, 1000)
     }
   } catch (error: any) {
-    console.error('Avatar upload error:', error)
-    setError(error.response?.data?.message || 'Failed to upload avatar')
+    console.error('Ошибка при загрузке аватара:', error)
+    setError(error.response?.data?.message || 'Не удалось загрузить аватар')
   } finally {
     setAvatarLoading(false)
   }
@@ -137,7 +83,7 @@ const handleAvatarUpload = async (e: React.FormEvent) => {
       
       // Проверка размера файла
       if (file.size > 10 * 1024 * 1024) {
-        setError('File size must be less than 10MB')
+        setError('Размер файла более 10MB')
         return
       }
       
@@ -148,7 +94,7 @@ const handleAvatarUpload = async (e: React.FormEvent) => {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">Profile Settings</h1>
+      <h1 className="text-2xl font-bold text-gray-900 mb-6">Настройки профиля</h1>
 
       <div className="card">
         {message && (
@@ -166,7 +112,7 @@ const handleAvatarUpload = async (e: React.FormEvent) => {
         {/* Секция аватара */}
         <div className="mb-6">
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Avatar
+            Аватар
           </label>
           <div className="flex items-center space-x-4">
             <img
@@ -186,19 +132,19 @@ const handleAvatarUpload = async (e: React.FormEvent) => {
                 disabled={avatarLoading}
               />
               <p className="text-xs text-gray-500 mt-1">
-                Select an image file (JPG, PNG, GIF) up to 10MB
+                Выберите вайл изображение (JPG, PNG, GIF) не более 10MB
               </p>
               {avatar && (
                 <div className="mt-2">
                   <p className="text-xs text-green-600">
-                    Selected: {avatar.name} ({(avatar.size / 1024 / 1024).toFixed(2)} MB)
+                    Выбран файл: {avatar.name} ({(avatar.size / 1024 / 1024).toFixed(2)} MB)
                   </p>
                   <button
                     onClick={handleAvatarUpload}
                     disabled={avatarLoading}
                     className="btn-primary mt-2 text-sm px-3 py-1 disabled:opacity-50"
                   >
-                    {avatarLoading ? 'Uploading...' : 'Upload Avatar'}
+                    {avatarLoading ? 'Загрузка...' : 'Загрузить аватар'}
                   </button>
                 </div>
               )}
@@ -210,7 +156,7 @@ const handleAvatarUpload = async (e: React.FormEvent) => {
         <form onSubmit={handleNameUpdate} className="space-y-4">
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-              Full Name
+              Полное имя
             </label>
             <input
               type="text"
@@ -228,7 +174,7 @@ const handleAvatarUpload = async (e: React.FormEvent) => {
               disabled={loading || name === user?.name}
               className="btn-primary disabled:opacity-50"
             >
-              {loading ? 'Updating...' : 'Update Name'}
+              {loading ? 'Обновление...' : 'Обновить Имя'}
             </button>
           </div>
         </form>
@@ -245,7 +191,7 @@ const handleAvatarUpload = async (e: React.FormEvent) => {
             disabled
           />
           <p className="text-sm text-gray-500 mt-1">
-            Email cannot be changed
+            Email нельзя изменить
           </p>
         </div>
       </div>

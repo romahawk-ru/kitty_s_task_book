@@ -42,13 +42,13 @@ const TaskForm: React.FC<TaskFormProps> = ({
       <div className="fixed inset-0 flex items-center justify-center p-4">
         <Dialog.Panel className="bg-white rounded-lg p-6 w-full max-w-md">
           <Dialog.Title className="text-lg font-semibold mb-4">
-            {initialData ? 'Edit Task' : 'Create New Task'}
+            {initialData ? 'Редактировать задачу' : 'Создать новую задачу'}
           </Dialog.Title>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Title *
+                Заголовок *
               </label>
               <input
                 type="text"
@@ -61,7 +61,7 @@ const TaskForm: React.FC<TaskFormProps> = ({
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Description
+                Описание
               </label>
               <textarea
                 value={formData.description}
@@ -74,38 +74,38 @@ const TaskForm: React.FC<TaskFormProps> = ({
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Status
+                  Статус
                 </label>
                 <select
                   value={formData.status}
                   onChange={(e) => setFormData({ ...formData, status: e.target.value as Task['status'] })}
                   className="input-field"
                 >
-                  <option value="TODO">To Do</option>
-                  <option value="IN_PROGRESS">In Progress</option>
-                  <option value="DONE">Done</option>
+                  <option value="TODO">Сделать</option>
+                  <option value="IN_PROGRESS">В работе</option>
+                  <option value="DONE">Выполнено</option>
                 </select>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Priority
+                  Приоритет
                 </label>
                 <select
                   value={formData.priority}
                   onChange={(e) => setFormData({ ...formData, priority: e.target.value as Task['priority'] })}
                   className="input-field"
                 >
-                  <option value="LOW">Low</option>
-                  <option value="MEDIUM">Medium</option>
-                  <option value="HIGH">High</option>
+                  <option value="LOW">Низкий</option>
+                  <option value="MEDIUM">Средний</option>
+                  <option value="HIGH">Высокий</option>
                 </select>
               </div>
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Due Date
+                Срок выполнения
               </label>
               <input
                 type="datetime-local"
@@ -117,14 +117,14 @@ const TaskForm: React.FC<TaskFormProps> = ({
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Assign To
+                Поручить задачу
               </label>
               <select
                 value={formData.assignedToId || ''}
                 onChange={(e) => setFormData({ ...formData, assignedToId: e.target.value || undefined })}
                 className="input-field"
               >
-                <option value="">Unassigned</option>
+                <option value="">Исполнитель не назначен</option>
                 {users?.map((user) => (
                   <option key={user.id} value={user.id}>
                     {user.name}
@@ -139,13 +139,13 @@ const TaskForm: React.FC<TaskFormProps> = ({
                 onClick={onClose}
                 className="btn-secondary"
               >
-                Cancel
+                Отмена
               </button>
               <button
                 type="submit"
                 className="btn-primary"
               >
-                {initialData ? 'Update' : 'Create'} Task
+                {initialData ? 'Обновить' : 'Создать'} задачу
               </button>
             </div>
           </form>

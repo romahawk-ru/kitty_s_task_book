@@ -19,7 +19,7 @@ const Register: React.FC = () => {
     e.preventDefault()
     
     if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match')
+      setError('Пароли не совпадают')
       return
     }
 
@@ -42,10 +42,10 @@ const Register: React.FC = () => {
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Create your account
+            Создайте свой аккаунт
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
-            Join Kitty's Task Book today
+            Присоединяйтесь к Kitty's Task Book уже сегодня
           </p>
         </div>
 
@@ -59,7 +59,7 @@ const Register: React.FC = () => {
           <div className="space-y-4">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-                Full Name
+                Имя
               </label>
               <input
                 id="name"
@@ -69,13 +69,13 @@ const Register: React.FC = () => {
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 className="input-field mt-1"
-                placeholder="Enter your full name"
+                placeholder="Введите свое полное имя"
               />
             </div>
 
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                Email address
+                Email aадресс
               </label>
               <input
                 id="email"
@@ -85,13 +85,13 @@ const Register: React.FC = () => {
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className="input-field mt-1"
-                placeholder="Enter your email"
+                placeholder="Введите свой email"
               />
             </div>
 
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-                Password
+                Пароль
               </label>
               <input
                 id="password"
@@ -101,13 +101,13 @@ const Register: React.FC = () => {
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 className="input-field mt-1"
-                placeholder="Create a password"
+                placeholder="Введите пароль"
               />
             </div>
 
             <div>
               <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
-                Confirm Password
+                Подтвердите пароль
               </label>
               <input
                 id="confirmPassword"
@@ -117,7 +117,7 @@ const Register: React.FC = () => {
                 value={formData.confirmPassword}
                 onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
                 className="input-field mt-1"
-                placeholder="Confirm your password"
+                placeholder="Подтвердите пароль"
               />
             </div>
           </div>
@@ -128,7 +128,7 @@ const Register: React.FC = () => {
               disabled={loading}
               className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50"
             >
-              {loading ? 'Creating account...' : 'Create account'}
+              {loading ? 'Создание аккаунта...' : 'Cоздать аккаунт'}
             </button>
           </div>
 
@@ -137,7 +137,7 @@ const Register: React.FC = () => {
               to="/login"
               className="text-primary-600 hover:text-primary-500 text-sm"
             >
-              Already have an account? Sign in
+              У вас уже есть аккаунт? Войти
             </Link>
           </div>
         </form>

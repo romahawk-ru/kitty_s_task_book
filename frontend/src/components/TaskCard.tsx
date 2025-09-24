@@ -53,7 +53,7 @@ const TaskCard: React.FC<TaskCardProps> = ({ task }) => {
       {task.assignedTo && (
         <div className="flex items-center mt-3 text-xs text-gray-600">
           <UserIcon className="w-4 h-4 mr-1" />
-          Assigned to: {task.assignedTo.name}
+          Поручено: {task.assignedTo.name}
         </div>
       )}
     </div>

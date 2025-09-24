@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTasks, useDeleteTask } from '../hooks/useTasks'
 import TaskForm from '../components/TaskForm'
-import { PlusIcon, TrashIcon } from '@heroicons/react/24/outline'
+import { PlusIcon, TrashIcon, PencilSquareIcon } from '@heroicons/react/24/outline'
 
 const Tasks: React.FC = () => {
   const { data: tasks, isLoading } = useTasks()
@@ -41,13 +41,13 @@ const Tasks: React.FC = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-gray-900">All Tasks</h1>
+        <h1 className="text-2xl font-bold text-gray-900">Все задачи</h1>
         <button
           onClick={() => setIsFormOpen(true)}
           className="btn-primary flex items-center"
         >
           <PlusIcon className="w-5 h-5 mr-2" />
-          New Task
+          Новая задача
         </button>
       </div>
 
@@ -57,22 +57,22 @@ const Tasks: React.FC = () => {
             <thead className="bg-gray-50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Title
+                  Заголовок
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Status
+                  Статус
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Priority
+                  PПриоритет
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Assigned To
+                  Поручено
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Due Date
+                  Срок выполнения
                 </th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Actions
+                  Действия
                 </th>
               </tr>
             </thead>
@@ -122,13 +122,13 @@ const Tasks: React.FC = () => {
                       onClick={() => handleEdit(task)}
                       className="text-primary-600 hover:text-primary-900 mr-3"
                     >
-                      Edit
+                      <PencilSquareIcon className='w-5 h-5' />
                     </button>
                     <button
                       onClick={() => handleDelete(task.id)}
                       className="text-red-600 hover:text-red-900"
                     >
-                      <TrashIcon className="w-4 h-4" />
+                      <TrashIcon className="w-5 h-5" />
                     </button>
                   </td>
                 </tr>

@@ -5,7 +5,7 @@ import {
   HomeIcon, 
   ClipboardDocumentListIcon, 
   UserIcon,
-  ArrowLeftOnRectangleIcon 
+  ArrowLeftEndOnRectangleIcon
 } from '@heroicons/react/24/outline'
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -13,9 +13,9 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const location = useLocation()
 
   const navigation = [
-    { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
-    { name: 'Tasks', href: '/tasks', icon: ClipboardDocumentListIcon },
-    { name: 'Profile', href: '/profile', icon: UserIcon },
+    { name: 'Дашборд', href: '/dashboard', icon: HomeIcon },
+    { name: 'Задачи', href: '/tasks', icon: ClipboardDocumentListIcon },
+    { name: 'Профиль', href: '/profile', icon: UserIcon },
   ]
 
   return (
@@ -59,7 +59,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                   alt={user?.name}
                   className="w-8 h-8 rounded-full object-cover"
                   onError={(e) => {
-                    console.log('Failed to load avatar:', user?.avatarUrl)
+                    console.log('Ошибка загрузки аватара:', user?.avatarUrl)
                     ;(e.target as HTMLImageElement).src = '/default-avatar.png'
                   }}
                 />
@@ -73,7 +73,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 className="p-2 text-gray-400 hover:text-gray-600"
                 title="Logout"
               >
-                <ArrowLeftOnRectangleIcon className="w-5 h-5" />
+                <ArrowLeftEndOnRectangleIcon className="w-5 h-5" />
               </button>
             </div>
           </div>
