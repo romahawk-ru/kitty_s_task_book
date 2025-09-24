@@ -34,9 +34,9 @@ export const getTasks = async (req: AuthRequest, res: Response) => {
 
     res.json(tasks)
   } catch (error: any) {
-    console.error('Get tasks error:', error)
+    console.error('Ошибка получения задач:', error)
     res.status(500).json({ 
-      message: 'Server error', 
+      message: 'Ошибка сервера', 
       error: error.message 
     })
   }
@@ -74,11 +74,11 @@ export const createTask = async (req: AuthRequest, res: Response) => {
       }
     })
 
-    res.status(201).json({ message: 'Task created successfully', task })
+    res.status(201).json({ message: 'Задача успешно создана', task })
   } catch (error: any) {
-    console.error('Create task error:', error)
+    console.error('Ошибка создания задачи:', error)
     res.status(500).json({ 
-      message: 'Server error', 
+      message: 'Ошибка сервера', 
       error: error.message 
     })
   }
@@ -117,11 +117,11 @@ export const updateTask = async (req: AuthRequest, res: Response) => {
       }
     })
 
-    res.json({ message: 'Task updated successfully', task })
+    res.json({ message: 'Задача успешно обновлена', task })
   } catch (error: any) {
-    console.error('Update task error:', error)
+    console.error('Ошибка задачи обновления:', error)
     res.status(500).json({ 
-      message: 'Server error', 
+      message: 'Ошибка сервера', 
       error: error.message 
     })
   }
@@ -135,11 +135,11 @@ export const deleteTask = async (req: AuthRequest, res: Response) => {
       where: { id }
     })
 
-    res.json({ message: 'Task deleted successfully' })
+    res.json({ message: 'Задача успешно удалена' })
   } catch (error: any) {
-    console.error('Delete task error:', error)
+    console.error('Ошибка удаления задачи:', error)
     res.status(500).json({ 
-      message: 'Server error', 
+      message: 'Ошибка сервера', 
       error: error.message 
     })
   }
@@ -158,9 +158,9 @@ export const getUsers = async (req: AuthRequest, res: Response) => {
 
     res.json(users)
   } catch (error: any) {
-    console.error('Get users error:', error)
+    console.error('Ошибка получения пользователя:', error)
     res.status(500).json({ 
-      message: 'Server error', 
+      message: 'Ошибка сервера', 
       error: error.message 
     })
   }

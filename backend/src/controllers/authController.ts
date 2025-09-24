@@ -10,7 +10,7 @@ export const register = async (req: Request, res: Response) => {
     // Check if user exists
     const existingUser = await prisma.user.findUnique({ where: { email } })
     if (existingUser) {
-      return res.status(400).json({ message: 'User already exists' })
+      return res.status(400).json({ message: 'Пользователь уже существует' })
     }
 
     // Hash password
@@ -29,7 +29,7 @@ export const register = async (req: Request, res: Response) => {
     const tokens = generateTokens({ userId: user.id })
 
     res.status(201).json({
-      message: 'User created successfully',
+      message: 'Пользователь успешно создан',
       tokens,
       user: {
         id: user.id,
@@ -39,9 +39,9 @@ export const register = async (req: Request, res: Response) => {
       }
     })
   } catch (error: any) {
-    console.error('Registration error:', error)
+    console.error('Ошибка регистрации:', error)
     res.status(500).json({ 
-      message: 'Server error', 
+      message: 'Ошибка сервера', 
       error: error.message 
     })
   }
@@ -54,20 +54,20 @@ export const login = async (req: Request, res: Response) => {
     // Find user
     const user = await prisma.user.findUnique({ where: { email } })
     if (!user) {
-      return res.status(400).json({ message: 'Invalid credentials' })
+      return res.status(400).json({ message: 'Неверные учетные данные' })
     }
 
     // Check password
     const isPasswordValid = await bcrypt.compare(password, user.password)
     if (!isPasswordValid) {
-      return res.status(400).json({ message: 'Invalid credentials' })
+      return res.status(400).json({ message: 'Неверные учетные данные' })
     }
 
     // Generate tokens
     const tokens = generateTokens({ userId: user.id })
 
     res.json({
-      message: 'Login successful',
+      message: 'Вход в систему прошел успешно',
       tokens,
       user: {
         id: user.id,
@@ -77,9 +77,9 @@ export const login = async (req: Request, res: Response) => {
       }
     })
   } catch (error: any) {
-    console.error('Login error:', error)
+    console.error('Ошибка входа в систему:', error)
     res.status(500).json({ 
-      message: 'Server error', 
+      message: 'Ошибка сервера', 
       error: error.message 
     })
   }

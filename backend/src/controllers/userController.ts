@@ -17,9 +17,9 @@ export const getProfile = async (req: AuthRequest, res: Response) => {
 
     res.json(user)
   } catch (error: any) {
-    console.error('Get profile error:', error)
+    console.error('Ошибка получения профиля:', error)
     res.status(500).json({ 
-      message: 'Server error', 
+      message: 'Ошибка сервера', 
       error: error.message 
     })
   }
@@ -29,8 +29,8 @@ export const updateProfile = async (req: AuthRequest, res: Response) => {
   try {
     const { name } = req.body
 
-    console.log('Updating profile for user:', req.user!.userId)
-    console.log('New name:', name)
+    console.log('Обновление профиля пользователя:', req.user!.userId)
+    console.log('Новое имя:', name)
 
     const user = await prisma.user.update({
       where: { id: req.user!.userId },
@@ -44,16 +44,16 @@ export const updateProfile = async (req: AuthRequest, res: Response) => {
       }
     })
 
-    console.log('Updated user:', user)
+    console.log('Обновленный полльзователь:', user)
 
     res.json({ 
-      message: 'Profile updated successfully', 
+      message: 'Профиль успешно обновлен', 
       user 
     })
   } catch (error: any) {
-    console.error('Update profile error:', error)
+    console.error('Ошибка обновления профиля:', error)
     res.status(500).json({ 
-      message: 'Server error', 
+      message: 'Ошибка сервера', 
       error: error.message 
     })
   }
@@ -62,7 +62,7 @@ export const updateProfile = async (req: AuthRequest, res: Response) => {
 export const uploadAvatar = async (req: AuthRequest, res: Response) => {
   try {
     if (!req.file) {
-      return res.status(400).json({ message: 'No file uploaded' })
+      return res.status(400).json({ message: 'Файл не загружен' })
     }
 
     // Используем относительный путь через proxy
@@ -80,11 +80,11 @@ export const uploadAvatar = async (req: AuthRequest, res: Response) => {
       }
     })
 
-    res.json({ message: 'Avatar uploaded successfully', user })
+    res.json({ message: 'Аватар успешно загружен', user })
   } catch (error: any) {
-    console.error('Upload avatar error:', error)
+    console.error('Ошибка при загрузке аватара:', error)
     res.status(500).json({ 
-      message: 'Server error', 
+      message: 'Ошибка сервера', 
       error: error.message 
     })
   }
